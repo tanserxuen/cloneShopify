@@ -1,2 +1,2 @@
 # cloneShopify
-[Click to view the website](http://tanserxuen.github.io/)
+[Click to view the website](https://tanserxuen.github.io/cloneShopify/)
