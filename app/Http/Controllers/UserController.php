@@ -84,6 +84,7 @@ class UserController extends Controller
 
         $user = User::find($id);
         $user->roles()->detach();
+        $user->delete();
 
         return redirect()->route('admins.index');
     }
