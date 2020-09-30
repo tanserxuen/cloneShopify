@@ -30,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/checkout';
+    // protected $redirectTo = '/checkout';
 
     /**
      * Create a new controller instance.
@@ -75,5 +75,10 @@ class RegisterController extends Controller
         $user->roles()->attach($role);
 
         return $user;
+    }
+
+    public function redirectTo(){
+        $this->redirectTo = route('home');
+        return $this->redirectTo;
     }
 }
