@@ -31,9 +31,9 @@ Route::group(['namespace' => 'authh'], function (){
     Route::get('/fgtpwd', 'FgtpwdController@fgtpwd');
     Route::get('/conf', 'LoginnController@checkAuth');
     Route::put('/reset', 'FgtpwdController@reset');
+    Route::post('/store', 'RegisterrController@store');
     // Route::group(['middleware' => 'CheckAuth'], function(){
     Route::middleware(['CheckAuth'])->group(function(){
-        Route::post('/store', 'RegisterrController@store');
         // Route::resource('/registerr', 'authh\RegisterrController@registerr', ['only'=> ['store'] ]);
         Route::post('/logoutt', 'LoginnController@logout');
     });

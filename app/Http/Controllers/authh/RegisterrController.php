@@ -40,8 +40,8 @@ class RegisterrController extends Controller
         $loginn->password = Hash::make($request['password']);
 
         $loginn ->save();
-        $request->session()->flash('success', 'Register was successful!');
+        $request->session()->flash('reset', 'Register was successful!');
         // return view('authh.loginn');
-        return redirect('/registerr');
+        return redirect('/loginn');
     }
 }
