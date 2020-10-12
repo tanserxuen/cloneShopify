@@ -1,17 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+// use App\Http\Middleware\CheckAuth;
 
 Route::get('/', 'TeaController@main')->name('home');
 
@@ -23,12 +13,33 @@ Route::middleware('auth')->group(function () {
 Route::middleware('can:manage-users')->group(function(){
     //staff
     Route::get('/staff', 'TeaController@staffmain')->name('staffhome');
-
-    Route::resource('/staff/orders', 'DisplayTeaController', ['except', ['create', 'store', 'edit', 'update', 'destroy']]);
-    Route::resource('/staff/admins', 'UserController', ['except' => ['show', 'create', 'store'] ]);
+    Route::prefix('/staff')->group(function(){
+        Route::resource('/orders', 'DisplayTeaController', ['only'=> ['index', 'show'] ]);
+        Route::resource('/admins', 'UserController', ['except' => ['show', 'create', 'store'] ]);
+    });
 });
 
 Auth::routes();
 Route::get('/home', 'HomeController@index');
 Route::get('/sendOrder', 'MailController@send');
 // Route::get('/test', 'HomeController@test');
+
+
+Route::group(['namespace' => 'authh'], function (){
+    Route::get('/loginn', 'LoginnController@loginn');
+    Route::get('/registerr', 'RegisterrController@registerr');
+    Route::get('/fgtpwd', 'FgtpwdController@fgtpwd');
+    Route::get('/conf', 'LoginnController@checkAuth');
+    Route::put('/reset', 'FgtpwdController@reset');
+    // Route::group(['middleware' => 'CheckAuth'], function(){
+    Route::middleware(['CheckAuth'])->group(function(){
+        Route::post('/store', 'RegisterrController@store');
+        // Route::resource('/registerr', 'authh\RegisterrController@registerr', ['only'=> ['store'] ]);
+        Route::post('/logoutt', 'LoginnController@logout');
+    });
+});
+
+Route::view('/test','test')->middleware('CheckAuth');
+// Route::get('/test', function () {
+//     session('logged_in');
+// })-;

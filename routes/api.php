@@ -25,6 +25,7 @@ Route::resource('teas', 'TeaController');
 //orders
 Route::resource('orders', 'OrderController');
 Route::get('orders/getTea/{id}', 'OrderController@getTea');
+Route::resource('loginn', 'res\LoginnResourceController', ['except'=> ['create', 'edit']]);
 
 // //List Articles
 // Route::get('articles','ArticleController@index');

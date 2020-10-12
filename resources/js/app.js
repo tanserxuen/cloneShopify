@@ -45,6 +45,8 @@ Vue.component('tea-staff', require('./components/Tea_staff.vue').default);
 //customer
 Vue.component('tea-cust', require('./components/Tea_cust.vue').default);
 Vue.component('checkout', require('./components/CheckOut.vue').default);
+Vue.component('loginn', require('./components/Login.vue').default);
+Vue.component('register', require('./components/Register.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
